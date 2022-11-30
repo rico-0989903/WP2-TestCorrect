@@ -1,6 +1,7 @@
 import os.path
 import sys
 
+import sqlite3
 from flask import Flask, render_template
 
 from lib.tablemodel import DatabaseModel
@@ -20,7 +21,7 @@ DATABASE_FILE = os.path.join(app.root_path, 'databases', 'testcorrect_vragen.db'
 # Check if the database file exists. If not, create a demo database
 if not os.path.isfile(DATABASE_FILE):
     print(f"Could not find database {DATABASE_FILE}, creating a demo database.")
-    create_demo_database(DATABASE_FILE)
+    create_demo_database(DATABASE_FILE)     
 dbm = DatabaseModel(DATABASE_FILE)
 
 # Main route that shows a list of tables in the database
@@ -28,6 +29,11 @@ dbm = DatabaseModel(DATABASE_FILE)
 # It is a way to "decorate" a function with additional functionality. You
 # can safely ignore this for now - or look into it as it is a really powerful
 # concept in Python.
+def get_db_connection():
+    conn = sqlite3.connect('databases/testcorrect_vragen.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
 @app.route("/")
 def index():
     tables = dbm.get_table_list()
@@ -42,10 +48,11 @@ def table_content(table_name=None):
     if not table_name:
         return "Missing table name", 400  # HTTP 400 = Bad Request
     else:
-        rows, column_names = dbm.get_table_content(table_name)
-        return render_template(
-            "table_details.html", rows=rows, columns=column_names, table_name=table_name
-        )
+        if table_name == "vragen":
+            conn = get_db_connection()
+            posts = conn.execute('SELECT * FROM vragen WHERE vraag LIKE "%<br>%" OR vraag LIKE "%&nbsp;%";').fetchall()
+            conn.close()
+            return render_template('table_details.html', posts=posts) 
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

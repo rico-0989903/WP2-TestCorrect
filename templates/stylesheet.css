@@ -1,0 +1,36 @@
+
+nav {
+    margin: 0px;
+}
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+  }
+.nav-item {
+    list-style: none;
+    margin-right: 2rem;
+}
+.nav-item a{
+    text-decoration: none;
+    color: black;
+}
+div {
+    background-color: blue;
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.nav-item:first-child{
+margin-right: auto;
+
+}

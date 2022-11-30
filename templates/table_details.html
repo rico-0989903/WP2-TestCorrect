@@ -11,80 +11,27 @@
 <body>
 <main>
     <h1>Database onderzoek</h1>
-
-    <!--auteurs tabel-->
-    {% if table_name == "auteurs"%}
     <p>Alle rijen in de tabel <b>{{ table_name }}</b>:</p>
-    <table>
-        <thead>
-        <tr>
-            {% for column in columns %}
-            <th>{{ column }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for row in rows %}
-        <tr>
-            {% for field in row %}
-            <td>{{ field }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-
-    </table>
-
-    <!--leerdoelen tabel-->
-    {% elif table_name == "leerdoelen" %}
-    <p>Alle rijen in de tabel <b>{{ table_name }}</b>:</p>
-    <table>
-       <thead>
-        <tr>
-            {% for column in columns %}
-            <th>{{ column }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for row in rows %}
-        <tr>
-            {% for field in row %}
-            <td>{{ field }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-
-    </table>
-    
-
-    <!--vragen tabel-->
-    {% elif table_name == "vragen" %}
-    <p>Alle rijen in de tabel <b>{{ table_name }}</b>:</p>
-    <table>
-        <thead>
-        <tr>
-            {% for column in columns %}
-            <th>{{ column }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for row in rows %}
-        <tr>
-            {% for field in row %}
-            {{ field}}
-            <td>{{ field }}</td>
-            {% endif %}
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-
-    </table>
-    {% endif %}
 </main>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Leerdoel</th>
+        <th>vraag</th>
+        <th>Auteur</th>
+        <th>Actie</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{ post['id'] }}</td>
+        <td>{{ post['leerdoel'] }}</td>
+        <td>{{ post['vraag'] }}</td>
+        <td>{{ post['auteur'] }}</td>
+        <td><form action="vraagdetail.html" method="get"><input type="submit" value="Aanpassen"></form></td>
+    </tr>
+    {% endfor %}
+
+</table>
 </body>
 
 </html>
