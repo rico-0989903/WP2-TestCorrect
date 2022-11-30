@@ -98,6 +98,47 @@
 .dnd_area-row-14-background-color {
   background-color: rgba(240, 242, 245, 1) !important;
 }
+
+.login_menu{
+  display: flex;
+  justify-content: center;
+}
+
+.form{
+  width: 50vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 35vh;
+  border: 2px solid black;
+  border-radius: 10px;
+  flex-shrink: 1;
+  padding: 15px;
+}
+
+.form_field{
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.login_input{
+  box-sizing: border-box;
+  padding: 7px;
+  border: 1px solid black;
+  border-radius: 5px;
+  
+}
+
+.login_label{
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 20px;
+  flex-shrink: inherit;
+}
+
 .widget_1666534542254-flexbox-positioning {
   display: -ms-flexbox !important;
   -ms-flex-direction: column !important;
