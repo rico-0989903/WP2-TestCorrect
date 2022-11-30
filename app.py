@@ -1,10 +1,18 @@
 from flask import Flask, render_template, request
+import os
+
+from lib.databasemodel import DatabaseModel
+
 
 FLASK_PORT = 3000
 FLASK_HOST = "0.0.0.0"
-DEBUG_STATUS = False
+DEBUG_STATUS = True
 
 app = Flask(__name__)
+
+DATABASE_FILE = os.path.join(app.root_path, 'databases', 'testcorrect_vragen.db')
+db = DatabaseModel(DATABASE_FILE)
+
 
 #DEFAULT PAGE
 @app.route("/")
@@ -16,7 +24,8 @@ def login_info():
     if request.method == "POST":
         username = request.form.get("gebruikersnaam")
         password = request.form.get("wachtwoord")
-        return f"Combination user  = {username}, {password}"
+        login_table = db.get_table_content("inloggegevens")
+        return f"Combination user  = {username}, {password}. Table {login_table}"
 
 if __name__ == "__main__":
     app.run(host=FLASK_HOST, port=FLASK_PORT, debug=DEBUG_STATUS)
