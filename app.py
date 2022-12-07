@@ -36,7 +36,45 @@ def login_info():
             return render_template("login_failed.html")
 
 
+#MAIN ROMAN
+from vragenmodel import VragenModel
 
 
-if __name__ == "__main__":
-    app.run(host=FLASK_HOST, port=FLASK_PORT, debug=DEBUG_STATUS)
+database_file = "databases/testcorrect_vragen.db"
+vragen_model = VragenModel(database_file)
+
+
+@app.route('/filtering/')
+def hello_world():
+    tables = vragen_model.get_tables()
+    return render_template('Index.html', tablenames=tables)
+
+@app.route('/filtering/vragen')
+def vragen():
+    posts = vragen_model.get_questions()
+    return render_template("vragen.html", posts=posts)
+
+@app.route('/filtering/leerdoelen')
+def leerdoelen():
+    posts = vragen_model.get_leerdoelen()
+    return render_template("leerdoelen.html", posts=posts)
+
+@app.route('/filtering/auteurs', methods=["GET", "POST"])
+def auteurs():
+    posts = vragen_model.get_auteurs()
+    return render_template("auteurs.html", posts=posts)
+
+@app.route('/vraagdetail', methods=["GET", "POST"])
+def vraagdetail():
+    id = request.form['id']
+    table = request.form['table']
+    posts = vragen_model.get_details(id, table)
+    return render_template("vraagdetail.html", posts=posts)
+
+
+
+# SELECT id, KOLOMNAAM from TABELNAAM
+# python filter op DATATYPE en stuur naar browser
+
+if __name__ == '__main__':
+    app.run(debug=True, port=8001)
