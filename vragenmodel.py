@@ -50,3 +50,12 @@ class VragenModel:
         sql_query = "SELECT * FROM " + table + " WHERE id = " + id + ";"
         results = self.run_query(sql_query)
         return results
+
+    def login(self, table_name, username, password):
+        sql_query = f"SELECT * FROM {table_name}"
+        table_content = self.run_query(sql_query)
+
+        for login in table_content:
+            if login[0] == username and login[1] == password:
+                return True
+        return False
