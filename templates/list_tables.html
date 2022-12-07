@@ -1,0 +1,13 @@
+<html>
+<head>
+   <link rel="stylesheet" href="styleseet.css">
+</head>
+<body>
+<h1>Kies een tabel voor onderzoek</h1>
+<ul>
+    {% for table in tablenames %}
+        <li><a href="/filtering/{{ table }}">{{ table }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

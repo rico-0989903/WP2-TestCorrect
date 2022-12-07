@@ -13,6 +13,7 @@
     <h1>Database onderzoek</h1>
     <p>Alle rijen in de tabel <b>{{ table_name }}</b>:</p>
 </main>
+{%if table_name == vragen:%}
 <table>
     <tr>
         <th>Id</th>
@@ -23,15 +24,18 @@
     </tr>
     {% for post in posts %}
     <tr>
-        <td>{{ post['id'] }}</td>
+        <form class="form" method="post">
+        <td name="id">{{ post['id'] }}</td>
         <td>{{ post['leerdoel'] }}</td>
         <td>{{ post['vraag'] }}</td>
         <td>{{ post['auteur'] }}</td>
-        <td><form action="vraagdetail.html" method="get"><input type="submit" value="Aanpassen"></form></td>
+        <td><a href="{{ url_for('vraagdetail') }}"><input type="submit" value="Aanpassen"></a></td>
+        </form>
     </tr>
     {% endfor %}
 
 </table>
+{% endif %}
 </body>
 
 </html>

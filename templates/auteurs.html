@@ -1,16 +1,30 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Auteurs</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <h1>Auteurs</h1>
 </head>
 <body>
-    <ul>
-        <li><a href=""></a></li>
-    </ul>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Voornaam</th>
+        <th>Achternaam</th>
+        <th>Geboortejaar</th>
+        <th>Medewerker</th>
+        <th>Met pensioen</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td name="id">{{ post[0] }}</td>
+        <td>{{ post[1] }}</td>
+        <td>{{ post[2] }}</td>
+        <td>{{ post[3] }}</td>
+        <td>{{ post[4] }}</td>
+        <td>{{ post[5] }}</td>
+        <td><form action="vraagdetail.html" method="get"><input type="submit" value="Aanpassen"></form></td>
+    </tr>
+    {% endfor %}
+   
+</table>
 </body>
 </html>

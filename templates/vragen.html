@@ -1,20 +1,26 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Vragen</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <h1>Vragen</h1>
 </head>
 <body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Leerdoel</th>
+        <th>Vraag</th>
+        <th>Auteur</th>
+    </tr>
     {% for post in posts %}
-        <div class='post'>
-            <p>{{ post['created'] }}</p>
-            <h2>{{ post['title'] }}</h2>
-            <p>{{ post['content'] }}</p>
-        </div>
+    <tr>
+        <td name="id">{{ post[0] }}</td>
+        <td>{{ post[1] }}</td>
+        <td>{{ post[2] }}</td>
+        <td>{{ post[3] }}</td>
+        <td><form action="vraagdetail.html" method="get"><input type="submit" value="Aanpassen"></form></td>
+    </tr>
     {% endfor %}
+   
+</table>
 </body>
 </html>
