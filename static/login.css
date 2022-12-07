@@ -128,7 +128,6 @@
   padding: 7px;
   border: 1px solid black;
   border-radius: 5px;
-  
 }
 
 .login_label{
@@ -147,6 +146,13 @@
   padding-left: 17px;
   padding-right: 17px;
   min-height: 40px;
+}
+
+.login_input_failed{
+  box-sizing: border-box;
+  padding: 7px;
+  border: 1px solid red;
+  border-radius: 5px;
 }
 
 .widget_1666534542254-flexbox-positioning {

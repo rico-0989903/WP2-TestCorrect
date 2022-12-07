@@ -30,7 +30,12 @@ def login_info():
         username = request.form.get("username")
         password = request.form.get("password")
         login_status = db.login("inloggegevens", username, password)
-        return login_status
+        if login_status == True:
+            return f"Login succesfull! Welcome {username}!"
+        else:
+            return render_template("login_failed.html")
+
+
 
 
 if __name__ == "__main__":

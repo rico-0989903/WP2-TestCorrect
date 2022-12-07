@@ -19,5 +19,5 @@ class DatabaseModel():
 
         for login in table_content:
             if login[0] == username and login[1] == password:
-                return f"Login succesfull! Welcome {username}!"
-        return "Login unsuccesfull"
+                return True
+        return False
