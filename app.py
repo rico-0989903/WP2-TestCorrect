@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 from vragenmodel import VragenModel
 
@@ -24,10 +24,18 @@ def leerdoelen():
     posts = vragen_model.get_leerdoelen()
     return render_template("leerdoelen.html", posts=posts)
 
-@app.route('/filtering/auteurs')
+@app.route('/filtering/auteurs', methods=["GET", "POST"])
 def auteurs():
     posts = vragen_model.get_auteurs()
     return render_template("auteurs.html", posts=posts)
+
+@app.route('/vraagdetail', methods=["GET", "POST"])
+def vraagdetail():
+    id = request.form['id']
+    table = request.form['table']
+    posts = vragen_model.get_details(id, table)
+    return render_template("vraagdetail.html", posts=posts)
+
 
 
 # SELECT id, KOLOMNAAM from TABELNAAM

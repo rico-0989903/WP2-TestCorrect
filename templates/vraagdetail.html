@@ -1,8 +1,36 @@
 <html>
     <head>
-        <h1>Details of ID {{ id }}</h1>
+        <link rel='stylesheet' href="{{ url_for('static', filename='stylesheetdetail.css')}}">
+        <nav class="navbar">
+            
+            <ul class="nav-links">
+                <li class="nav-item"><a href="/"><img src="https://www.test-correct.nl/hubfs/raw_assets/public/test-correct/images/testcorrect-logo.svg" class="logo"></a></li>
+                <li class="nav-item"><a href="/filtering/vragen">vragen</a></li>
+                <li class="nav-item"><a href="/filtering/leerdoelen">leerdoelen</a></li>
+                <li class="nav-item"><a href="/filtering/auteurs">auteurs</a></li>
+            </ul>  
+        </nav> 
     </head>
     <body>
-        
+
+        {% if table == vragen:%}
+            {% for post in posts%}
+                <p>{{ post[0] }}</p>
+                <p>{{ post[1] }}</p>
+                <p>{{ post[2] }}</p>
+                <input type="number" name="geboortejaar" placeholder="{{ post[3] }}"><br><br>
+                <input type="number" name="medewerker" placeholder="{{ post[4] }}">
+                <p>{{ post[5] }}</p>
+            {% endfor %}
+        {% elif table == auteurs:%}
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post[0] }}</td>
+                    <td>{{ post[1] }}</td>
+                    <td>{{ post[2] }}</td>
+                    <td>{{ post[3] }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
     </body>
 </html>

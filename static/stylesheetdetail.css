@@ -28,9 +28,8 @@ div {
 }
 
 body{
-    
     height: 100%;
-    margin: 0px;
+    margin: 20px;
     padding: 0px;
 }
 head{
@@ -40,11 +39,4 @@ head{
 .nav-item:first-child{
 margin-right: auto;
 
-}
-p{
-    position: relative;
-    top: 40%;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    text-align: center;
 }
