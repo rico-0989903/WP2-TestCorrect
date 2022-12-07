@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel='stylesheet' href="{{ url_for('static', filename='stylesheet.css')}}">
+    <nav class="navbar">
+        
+        <ul class="nav-links">
+            <li class="nav-item"><a href="/"><img src="https://www.test-correct.nl/hubfs/raw_assets/public/test-correct/images/testcorrect-logo.svg" class="logo"></a></li>
+            <li class="nav-item"><a href="/filtering/vragen">vragen</a></li>
+            <li class="nav-item"><a href="/filtering/leerdoelen">leerdoelen</a></li>
+            <li class="nav-item"><a href="/filtering/auteurs">auteurs</a></li>
+        </ul>  
+    </nav>   
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Leerdoel</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <form action="{{ url_for('vraagdetail') }}" method="post">
+        <input type="hidden" name="id" value="{{ post[0] }}">
+        <input type="hidden" name="table" value="leerdoelen">
+        <td>{{ post[0] }}</td>
+        <td>{{ post[1] }}</td>
+        <td><input type="submit" value="Aanpassen"></td>
+        </form>
+    </tr>
+    {% endfor %}
+   
+</table>
+</body>
+</html>

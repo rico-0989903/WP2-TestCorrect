@@ -12,26 +12,30 @@
 <main>
     <h1>Database onderzoek</h1>
     <p>Alle rijen in de tabel <b>{{ table_name }}</b>:</p>
-    <table>
-        <thead>
-        <tr>
-            {% for column in columns %}
-            <th>{{ column }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for row in rows %}
-        <tr>
-            {% for field in row %}
-            <td>{{ field }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-        </tbody>
-
-    </table>
 </main>
+{%if table_name == vragen:%}
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Leerdoel</th>
+        <th>vraag</th>
+        <th>Auteur</th>
+        <th>Actie</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <form class="form" method="post">
+        <td name="id">{{ post['id'] }}</td>
+        <td>{{ post['leerdoel'] }}</td>
+        <td>{{ post['vraag'] }}</td>
+        <td>{{ post['auteur'] }}</td>
+        <td><a href="{{ url_for('vraagdetail') }}"><input type="submit" value="Aanpassen"></a></td>
+        </form>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endif %}
 </body>
 
 </html>
