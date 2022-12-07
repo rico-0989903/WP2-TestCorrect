@@ -21,13 +21,3 @@ class DatabaseModel():
             if login[0] == username and login[1] == password:
                 return f"Login succesfull! Welcome {username}!"
         return "Login unsuccesfull"
-
-
-
-        first = table_content[0]
-        first_user = first[0]
-        first_pass = first[1]
-        print(f"Username: {first_user}, Password: {first_pass}")
-        
-        # Note that this method returns 2 variables!
-        return first_user, first_pass

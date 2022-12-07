@@ -19,6 +19,7 @@ db = DatabaseModel(DATABASE_FILE)
 def index():
     return render_template("homepage.html")
 
+
 @app.route("/login")
 def login():
     return render_template("login.html")
@@ -26,8 +27,8 @@ def login():
 @app.route("/login", methods=["POST"])
 def login_info():
     if request.method == "POST":
-        username = request.form.get("gebruikersnaam")
-        password = request.form.get("wachtwoord")
+        username = request.form.get("username")
+        password = request.form.get("password")
         login_status = db.login("inloggegevens", username, password)
         return login_status
 
