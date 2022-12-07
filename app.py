@@ -1,13 +1,48 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
+import os
 
-from vragenmodel import VragenModel
+from lib.databasemodel import DatabaseModel
+
+
+FLASK_PORT = 3000
+FLASK_HOST = "0.0.0.0"
+DEBUG_STATUS = True
 
 app = Flask(__name__)
+
+DATABASE_FILE = os.path.join(app.root_path, 'databases', 'testcorrect_vragen.db')
+db = DatabaseModel(DATABASE_FILE)
+
+
+#DEFAULT PAGE
+@app.route("/")
+def index():
+    return render_template("homepage.html")
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/login", methods=["POST"])
+def login_info():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        login_status = db.login("inloggegevens", username, password)
+        if login_status == True:
+            return f"Login succesfull! Welcome {username}!"
+        else:
+            return render_template("login_failed.html")
+
+
+#MAIN ROMAN
+from vragenmodel import VragenModel
+
 
 database_file = "databases/testcorrect_vragen.db"
 vragen_model = VragenModel(database_file)
 
-@app.route('/')
 
 @app.route('/filtering/')
 def hello_world():
