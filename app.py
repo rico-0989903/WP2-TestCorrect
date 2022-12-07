@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 
 from lib.databasemodel import DatabaseModel
@@ -17,9 +17,13 @@ db = DatabaseModel(DATABASE_FILE)
 #DEFAULT PAGE
 @app.route("/")
 def index():
+    return render_template("homepage.html")
+
+@app.route("/login")
+def login():
     return render_template("login.html")
 
-@app.route("/", methods=["POST"])
+@app.route("/login", methods=["POST"])
 def login_info():
     if request.method == "POST":
         username = request.form.get("gebruikersnaam")
