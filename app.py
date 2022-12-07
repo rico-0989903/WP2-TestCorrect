@@ -24,8 +24,9 @@ def login_info():
     if request.method == "POST":
         username = request.form.get("gebruikersnaam")
         password = request.form.get("wachtwoord")
-        login_table = db.get_table_content("inloggegevens")
-        return f"Combination user  = {username}, {password}. Table {login_table}"
+        login_status = db.login("inloggegevens", username, password)
+        return login_status
+
 
 if __name__ == "__main__":
     app.run(host=FLASK_HOST, port=FLASK_PORT, debug=DEBUG_STATUS)

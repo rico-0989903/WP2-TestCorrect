@@ -139,6 +139,16 @@
   flex-shrink: inherit;
 }
 
+.login_button{
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: #004df5;
+  padding-left: 17px;
+  padding-right: 17px;
+  min-height: 40px;
+}
+
 .widget_1666534542254-flexbox-positioning {
   display: -ms-flexbox !important;
   -ms-flex-direction: column !important;
