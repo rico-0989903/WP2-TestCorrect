@@ -40,6 +40,21 @@ def vragen():
     posts = vragen_model.get_questions()
     return render_template("vragen.html", posts=posts)
 
+@app.route('/filtering/vragen/typfout')
+def typfout():
+    posts = vragen_model.get_typfout()
+    return render_template("vragen.html", posts=posts)
+
+@app.route('/filtering/vragen/auteurfout')
+def auteurfout():
+    posts = vragen_model.get_auteurfout()
+    return render_template("vragen.html", posts=posts)
+
+@app.route('/filtering/vragen/leerdoelfout')
+def leerdoelfout():
+    posts = vragen_model.get_leerdoelfout()
+    return render_template("vragen.html", posts=posts)
+
 @app.route('/filtering/leerdoelen')
 def leerdoelen():
     posts = vragen_model.get_leerdoelen()

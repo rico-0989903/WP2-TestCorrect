@@ -36,6 +36,21 @@ class VragenModel:
         results = self.run_query(sql_query)
         return results 
     
+    def get_typfout(self):
+        sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%';" 
+        results = self.run_query(sql_query)
+        return results 
+    
+    def get_auteurfout(self):
+        sql_query = "SELECT * FROM vragen WHERE auteur > 17;" 
+        results = self.run_query(sql_query)
+        return results
+    
+    def get_leerdoelfout(self):
+        sql_query = "SELECT * FROM vragen WHERE leerdoel > 7;" 
+        results = self.run_query(sql_query)
+        return results 
+    
     def get_auteurs(self):
         sql_query = "SELECT * FROM auteurs WHERE geboortejaar < 1940 OR medewerker = 0 OR medewerker = 1;" 
         results = self.run_query(sql_query)
