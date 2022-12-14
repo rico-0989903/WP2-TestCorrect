@@ -10,6 +10,11 @@ Flask.secret_key = "team_brainstorm"
 database_file = "databases/testcorrect_vragen.db"
 vragen_model = VragenModel(database_file)
 
+@app.before_request
+def check_login():
+    if "login" not in session and request.endpoint not in ["login", "static", "login_handle"]:
+        return redirect(url_for("login"))
+
 #homepage
 @app.route("/")
 def index():        
