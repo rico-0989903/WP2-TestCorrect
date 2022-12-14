@@ -8,16 +8,17 @@ app = Flask(__name__)
 database_file = "databases/testcorrect_vragen.db"
 vragen_model = VragenModel(database_file)
 
-#DEFAULT PAGE
+#homepage
 @app.route("/")
 def index():
     return render_template("homepage.html")
 
-
+#login pagina
 @app.route("/login")
 def login():
     return render_template("login.html")
 
+#login handeling
 @app.route("/login", methods=["POST"])
 def login_info():
     if request.method == "POST":
@@ -29,42 +30,49 @@ def login_info():
         else:
             return render_template("login_failed.html")
 
-
+#keuzescherm
 @app.route('/filtering/')
 def hello_world():
     tables = vragen_model.get_tables()
     return render_template('Index.html', tablenames=tables)
 
+#laat alle fouten zien
 @app.route('/filtering/vragen')
 def vragen():
     posts = vragen_model.get_questions()
     return render_template("vragen.html", posts=posts)
 
+#laat alle typfouten zien
 @app.route('/filtering/vragen/typfout')
 def typfout():
     posts = vragen_model.get_typfout()
     return render_template("vragen.html", posts=posts)
 
+#laat alle niet bestaande auteurs zien
 @app.route('/filtering/vragen/auteurfout')
 def auteurfout():
     posts = vragen_model.get_auteurfout()
     return render_template("vragen.html", posts=posts)
 
+#laat alle niet bestaande leerdoelen zien
 @app.route('/filtering/vragen/leerdoelfout')
 def leerdoelfout():
     posts = vragen_model.get_leerdoelfout()
     return render_template("vragen.html", posts=posts)
 
+#laat alle leerdoelen zien
 @app.route('/filtering/leerdoelen')
 def leerdoelen():
     posts = vragen_model.get_leerdoelen()
     return render_template("leerdoelen.html", posts=posts)
 
+#laat alle auteurs zien
 @app.route('/filtering/auteurs', methods=["GET", "POST"])
 def auteurs():
     posts = vragen_model.get_auteurs()
     return render_template("auteurs.html", posts=posts)
 
+#laat de details van de gekozen line zien
 @app.route('/vraagdetail', methods=["GET", "POST"])
 def vraagdetail():
     id = request.form['id']
