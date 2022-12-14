@@ -1,17 +1,22 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
 from vragenmodel import VragenModel
 
 
 app = Flask(__name__)
+Flask.secret_key = "team_brainstorm"
+
 
 database_file = "databases/testcorrect_vragen.db"
 vragen_model = VragenModel(database_file)
 
 #homepage
 @app.route("/")
-def index():
-    return render_template("homepage.html")
+def index():        
+    if "login" in session:
+        return redirect(url_for("hello_world"))
+    else:
+        return redirect(url_for("login"))
 
 #login pagina
 @app.route("/login")
@@ -19,13 +24,14 @@ def login():
     return render_template("login.html")
 
 #login handeling
-@app.route("/login", methods=["POST"])
-def login_info():
+@app.route("/login", methods=["POST", "GET"])
+def login_handle():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
         login_status = vragen_model.login("inloggegevens", username, password)
         if login_status == True:
+            session['login'] = "logged_in"
             return redirect(url_for("hello_world"))
         else:
             return render_template("login_failed.html")
