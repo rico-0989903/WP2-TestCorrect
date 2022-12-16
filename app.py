@@ -42,6 +42,13 @@ def login_handle():
         else:
             return render_template("login_failed.html")
 
+@app.route("/filtering/logout")
+def logout():
+    del session['login']
+    del session['username']
+    print(session)
+    return redirect(url_for('login'))
+
 #dashboardscherm
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
