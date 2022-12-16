@@ -34,7 +34,11 @@ def login_info():
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     posts = vragen_model.get_username()
-    return render_template("dashboard.html", posts=posts)
+    for post in posts:
+        if post[2] == "True":
+            return render_template("dashboard.html", posts=posts)
+        else:
+            return render_template("norights.html", posts=posts)
 
 @app.route("/check", methods=["GET", "POST"])
 def check():
@@ -44,6 +48,7 @@ def check():
         admin = "False"
     elif admin == "Geef rechten":
         admin = "True"
+    
     vragen_model.set_admin(username, admin)
     return redirect(url_for('dashboard')) 
 

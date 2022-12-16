@@ -13,23 +13,14 @@
 </head>
 <body>
 <table>
+    <h1>You have no rights to change admin status</h1>
     <tr>
         <th>Gebruikersnaam</th>
-        <th>Admin</th>
     </tr>
 {% for post in posts %}
     <tr>
-        <form action="{{ url_for('check') }}" method="post">
-        <input type="hidden" name="username" value="{{ post[0] }}">
         <td>{{ post[0] }}</td>
-        {% if post[2] == "True" %}
-        <td><input class="good" type="submit" name="admin" value="Ontneem rechten"></td>
-        {% else %}
-        <td><input class="bad" type="submit" name="admin" value="Geef rechten"></td>
-        {% endif %}
-        </form>
     </tr>
- 
-{% endfor %}
+{% endfor%}
 </body>
 </html>
