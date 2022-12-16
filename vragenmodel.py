@@ -80,7 +80,11 @@ class VragenModel:
         results = self.run_update(sql_query)
         print (results)
         return results
-        
+    
+    def check_rights(self, username):
+        sql_query = f'SELECT rights FROM inlog WHERE gebruikersnaam = "{username}";'
+        results = self.run_query(sql_query)
+        return results
 
     def login(self, table_name, username, password):
         sql_query = f"SELECT * FROM {table_name}"

@@ -37,6 +37,7 @@ def login_handle():
         login_status = vragen_model.login("inlog", username, password)
         if login_status == True:
             session['login'] = "logged_in"
+            session.update({'username':username})
             return redirect(url_for("hello_world"))
         else:
             return render_template("login_failed.html")
@@ -44,12 +45,15 @@ def login_handle():
 #dashboardscherm
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
+    username = session['username']
+    print(username)
+    check = vragen_model.check_rights(username)
     posts = vragen_model.get_username()
-    for post in posts:
-        if post[2] == "True":
-            return render_template("dashboard.html", posts=posts)
-        else:
-            return render_template("norights.html", posts=posts)
+    check = str(check[0])
+    if check == "('True',)":
+        return render_template("dashboard.html", posts=posts)
+    else:
+        return render_template("norights.html", posts=posts)
 
 @app.route("/check", methods=["GET", "POST"])
 def check():
@@ -66,6 +70,7 @@ def check():
 #keuzescherm
 @app.route('/filtering/')
 def hello_world():
+    print(session)
     tables = vragen_model.get_tables()
     return render_template('Index.html', tablenames=tables)
 
