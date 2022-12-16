@@ -27,6 +27,31 @@ div {
     padding: 0px;
 }
 
+.filter_knop_nav{
+    display: inline-flex;
+    list-style-type: none;
+    width: 100%;
+    justify-content: center;
+    margin-top: 15px;
+    padding:15px;
+}
+
+.filter_knop{
+    text-align: center;
+    border: 1px solid #004df5;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    text-decoration: none;
+    background-color: #004df5;
+    color: white;
+    font-family: Impact, 'Arial', sans-serif;
+}
+
+.filter_knop:hover{
+    box-shadow: 2px 2px 2px black;
+}
+
 body{
     
     height: 100%;
