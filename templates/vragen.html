@@ -12,17 +12,19 @@
     </nav>   
 </head>
 <body>
-<table>
     <ul class="filter_knop_nav">
         <li><a class="filter_knop" href="/filtering/vragen/typfout">Typ fouten</a></li>
         <li><a class="filter_knop" href="/filtering/vragen/auteurfout">Niet bestaande auteurs</a></li>
         <li><a class="filter_knop" href="/filtering/vragen/leerdoelfout">Niet bestaande leerdoelen</a></li>
     </ul>
+<table>    
+    {% if check == "('True',)" %}
     <tr>
         <th>ID</th>
         <th>Leerdoel</th>
         <th>Vraag</th>
         <th>Auteur</th>
+        <th></th>
     </tr>
     {% for post in posts %}
     <tr>
@@ -37,6 +39,22 @@
         </form>
     </tr>
     {% endfor %}
+    {% else %}
+    <tr>
+        <th>ID</th>
+        <th>Leerdoel</th>
+        <th>Vraag</th>
+        <th>Auteur</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{ post[0] }}</td>
+        <td>{{ post[1] }}</td>
+        <td>{{ post[2] }}</td>
+        <td>{{ post[3] }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
 </table>
 </body>
 </html>
