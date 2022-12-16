@@ -53,10 +53,9 @@ def logout():
 @app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     username = session['username']
-    print(username)
     check = vragen_model.check_rights(username)
-    posts = vragen_model.get_username()
     check = str(check[0])
+    posts = vragen_model.get_username()
     if check == "('True',)":
         return render_template("dashboard.html", posts=posts)
     else:
@@ -84,38 +83,56 @@ def hello_world():
 #laat alle fouten zien
 @app.route('/filtering/vragen')
 def vragen():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
     posts = vragen_model.get_questions()
-    return render_template("vragen.html", posts=posts)
+    return render_template("vragen.html", check=check, posts=posts)
 
 #laat alle typfouten zien
 @app.route('/filtering/vragen/typfout')
 def typfout():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
     posts = vragen_model.get_typfout()
-    return render_template("vragen.html", posts=posts)
+    return render_template("vragen.html", check=check, posts=posts)
 
 #laat alle niet bestaande auteurs zien
 @app.route('/filtering/vragen/auteurfout')
 def auteurfout():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
     posts = vragen_model.get_auteurfout()
-    return render_template("vragen.html", posts=posts)
+    return render_template("vragen.html", check=check, posts=posts)
 
 #laat alle niet bestaande leerdoelen zien
 @app.route('/filtering/vragen/leerdoelfout')
 def leerdoelfout():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
     posts = vragen_model.get_leerdoelfout()
-    return render_template("vragen.html", posts=posts)
+    return render_template("vragen.html", check=check, posts=posts)
 
 #laat alle leerdoelen zien
 @app.route('/filtering/leerdoelen')
 def leerdoelen():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
     posts = vragen_model.get_leerdoelen()
-    return render_template("leerdoelen.html", posts=posts)
+    return render_template("leerdoelen.html",check=check, posts=posts)
 
 #laat alle auteurs zien
 @app.route('/filtering/auteurs', methods=["GET", "POST"])
 def auteurs():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
     posts = vragen_model.get_auteurs()
-    return render_template("auteurs.html", posts=posts)
+    return render_template("auteurs.html",check=check, posts=posts)
 
 #laat de details van de gekozen line zien
 @app.route('/vraagdetail', methods=["GET", "POST"])

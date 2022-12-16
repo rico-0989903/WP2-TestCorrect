@@ -14,9 +14,11 @@
 <body>
 
 <table>
+    {% if check == "('True',)" %}
     <tr>
         <th>ID</th>
         <th>Leerdoel</th>
+        <th></th>
     </tr>
     {% for post in posts %}
     <tr>
@@ -29,7 +31,18 @@
         </form>
     </tr>
     {% endfor %}
-   
+    {% else %}
+    <tr>
+        <th>ID</th>
+        <th>Leerdoel</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{ post[0] }}</td>
+        <td>{{ post[1] }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
 </table>
 </body>
 </html>

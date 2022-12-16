@@ -11,12 +11,19 @@ nav {
     padding: 10px;
   }
 .nav-item {
+    color: #041f74;
+    font-family: Nunito,sans-serif;
+    font-size: 18px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.33;
     list-style: none;
     margin-right: 2rem;
 }
 .nav-item a{
     text-decoration: none;
-    color: black;
+   
 }
 div {
     background-color: blue;
@@ -38,8 +45,9 @@ div {
 
 .filter_knop{
     text-align: center;
-    border: 1px solid #004df5;
+    
     border-radius: 10px;
+    text-shadow: 2px 2px 0px #000000;
     padding: 10px;
     margin-left: 10px;
     text-decoration: none;
@@ -72,4 +80,32 @@ p{
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     text-align: center;
+}
+table{
+    position: relative;
+    left: 5vw;
+    border: solid black 2px;
+
+    width: 90vw;
+    color: black;
+    font-family: monospace;
+    font-size: 15px;
+    text-align: left;
+    box-shadow: 0px 0px 10px black;
+}
+
+th{
+    border: solid black 2px;
+    margin: 0px 0px 0px 2px;
+    padding: 5px;
+    background: rgb(0, 179, 255, 0.9);
+    color: black;
+    text-shadow: 0px 0px 20px black;
+}
+
+td{
+    border: solid black 2px;
+    padding: 5px 5px 5px 5px;
+    color: white; 
+    background-color: rgb(0, 0, 0, 0.6);
 }

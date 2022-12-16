@@ -12,8 +12,8 @@
     </nav>   
 </head>
 <body>
-
 <table>
+    {% if check == "('True',)" %}
     <tr>
         <th>ID</th>
         <th>Voornaam</th>
@@ -21,6 +21,7 @@
         <th>Geboortejaar</th>
         <th>Medewerker</th>
         <th>Met pensioen</th>
+        <th></th>
     </tr>
     {% for post in posts %}
     <tr>
@@ -37,7 +38,26 @@
         </form>
     </tr>
     {% endfor %}
-   
+    {% else %}
+    <tr>
+        <th>ID</th>
+        <th>Voornaam</th>
+        <th>Achternaam</th>
+        <th>Geboortejaar</th>
+        <th>Medewerker</th>
+        <th>Met pensioen</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{ post[0] }}</td>
+        <td>{{ post[1] }}</td>
+        <td>{{ post[2] }}</td>
+        <td>{{ post[3] }}</td>
+        <td>{{ post[4] }}</td>
+        <td>{{ post[5] }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
 </table>
 </body>
 </html>
