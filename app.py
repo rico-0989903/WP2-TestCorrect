@@ -34,12 +34,34 @@ def login_handle():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        login_status = vragen_model.login("inloggegevens", username, password)
+        login_status = vragen_model.login("inlog", username, password)
         if login_status == True:
             session['login'] = "logged_in"
             return redirect(url_for("hello_world"))
         else:
             return render_template("login_failed.html")
+
+#dashboardscherm
+@app.route("/dashboard", methods=["GET", "POST"])
+def dashboard():
+    posts = vragen_model.get_username()
+    for post in posts:
+        if post[2] == "True":
+            return render_template("dashboard.html", posts=posts)
+        else:
+            return render_template("norights.html", posts=posts)
+
+@app.route("/check", methods=["GET", "POST"])
+def check():
+    username = request.form.get("username")
+    admin = request.form.get("admin")
+    if admin == "Ontneem rechten":
+        admin = "False"
+    elif admin == "Geef rechten":
+        admin = "True"
+    
+    vragen_model.set_admin(username, admin)
+    return redirect(url_for('dashboard')) 
 
 #keuzescherm
 @app.route('/filtering/')

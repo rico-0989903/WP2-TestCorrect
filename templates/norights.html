@@ -1,24 +1,26 @@
-
 <html>
 <head>
-    <title>Problem Page</title>
-
-    <link rel='stylesheet' href="{{ url_for('static', filename='stylesheet.css' )}}">
+    <link rel='stylesheet' href="{{ url_for('static', filename='stylesheet.css')}}">
     <nav class="navbar">
         
         <ul class="nav-links">
             <li class="nav-item"><a href="/"><img src="https://www.test-correct.nl/hubfs/raw_assets/public/test-correct/images/testcorrect-logo.svg" class="logo"></a></li>
-            <li class="nav-item"><a href="/dashboard">dashboard</a></li>
             <li class="nav-item"><a href="/filtering/vragen">vragen</a></li>
             <li class="nav-item"><a href="/filtering/leerdoelen">leerdoelen</a></li>
             <li class="nav-item"><a href="/filtering/auteurs">auteurs</a></li>
-        </ul> 
-    </nav>    
+        </ul>  
+    </nav>   
 </head>
 <body>
-    <div id="div">
-        <p>WELCOME</p>
-        <p>Please choose one of the tables in the top right corner</p>
-    </div>
+<table>
+    <h1>You have no rights to change admin status</h1>
+    <tr>
+        <th>Gebruikersnaam</th>
+    </tr>
+{% for post in posts %}
+    <tr>
+        <td>{{ post[0] }}</td>
+    </tr>
+{% endfor%}
 </body>
 </html>

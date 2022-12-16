@@ -13,6 +13,18 @@ class VragenModel:
         conn.close()
         return tables
 
+    def run_update(self, sql_query):
+        try:
+            conn = sqlite3.connect(self.database_file)
+            c = conn.cursor()
+            c.execute(sql_query)
+            conn.commit()
+        except sqlite3.Error as error:
+            print(error)
+        finally:
+            conn.close()
+            print("Connection closed")
+
     def get_tables(self):
         sql_query = "SELECT name FROM sqlite_master WHERE type='table';"
         result = self.run_query(sql_query)
@@ -20,16 +32,6 @@ class VragenModel:
         for table in result:
             table_list.append(table[0])
         return table_list
-
-    def get_unconvertable_values(self, table_name, column_name, datatype):
-        sql_query = "SELECT id, " + column_name + " FROM " + table_name
-        results = self.run_query(sql_query)
-        unconvertable_values = []
-        for result in results:
-            if datatype == "boolean":
-                if result[1] != "0" and result[1] != "1":
-                    unconvertable_values.append(result)
-        return unconvertable_values
     
     def get_questions(self):
         sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%' OR leerdoel > 7 OR auteur > 17;" 
@@ -63,8 +65,22 @@ class VragenModel:
 
     def get_details(self, id, table):
         sql_query = "SELECT * FROM " + table + " WHERE id = " + id + ";"
+        print(sql_query)
         results = self.run_query(sql_query)
         return results
+
+    def get_username(self):
+        sql_query = "SELECT * FROM inlog;"
+        results = self.run_query(sql_query)
+        return results
+    
+    def set_admin(self, username, admin):
+        sql_query = f'UPDATE inlog SET rights = "{admin}" WHERE gebruikersnaam = "{username}";' 
+        print (sql_query)
+        results = self.run_update(sql_query)
+        print (results)
+        return results
+        
 
     def login(self, table_name, username, password):
         sql_query = f"SELECT * FROM {table_name}"
