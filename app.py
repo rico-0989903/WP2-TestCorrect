@@ -148,8 +148,8 @@ def vraag_aanpassen():
         question_id = request.form.get("id")
         leerdoel = request.form.get("leerdoel")
         question = request.form.get("question")
-        form_intel = [question_id, leerdoel, question]
-        print(form_intel)
+        auteur = request.form.get("auteur")
+        vragen_model.update_question(question_id, leerdoel, question, auteur)
     return redirect(url_for("vragen"))
 
 

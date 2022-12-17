@@ -23,10 +23,11 @@
                     <p>Leerdoel: </p>
                     <input class="input_field" name="leerdoel" type="text" value="{{ post[1] }}">
                 </article>
-                <textarea class="question_field" name="question">{{ post[2] }}</textarea> <br>
-                <input type="number" name="geboortejaar" placeholder="{{ post[3] }}"><br><br>
-                <input type="number" name="medewerker" placeholder="{{ post[4] }}">
-                <p>{{ post[5] }}</p>
+                <textarea class="question_field" name="question">{{ post[2] }}</textarea>
+                <article class="leerdoel_field">
+                    <p> Auteur: </p>
+                    <input class="input_field" type="text" name="auteur" value="{{ post[3] }}">
+                </article> <br><br>
                 <input type="submit" value="Update vraag" class="update_button">
             {% endfor %}
         {% elif table == auteurs:%}
