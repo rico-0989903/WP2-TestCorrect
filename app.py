@@ -142,6 +142,16 @@ def vraagdetail():
     posts = vragen_model.get_details(id, table)
     return render_template("vraagdetail.html", posts=posts)
 
+@app.route('/vraagdetail/aanpassen', methods=["GET", "POST"])
+def vraag_aanpassen():
+    if request.method == "POST":
+        question_id = request.form.get("id")
+        leerdoel = request.form.get("leerdoel")
+        question = request.form.get("question")
+        auteur = request.form.get("auteur")
+        vragen_model.update_question(question_id, leerdoel, question, auteur)
+    return redirect(url_for("vragen"))
+
 
 
 # SELECT id, KOLOMNAAM from TABELNAAM

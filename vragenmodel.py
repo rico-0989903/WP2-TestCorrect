@@ -86,6 +86,11 @@ class VragenModel:
         results = self.run_query(sql_query)
         return results
 
+    def update_question(self, id, leerdoel, question, auteur):
+        sql_query = f'UPDATE vragen SET leerdoel = "{leerdoel}", vraag = "{question}", auteur = "{auteur}" WHERE id = "{id}"'
+        print(sql_query)
+        self.run_update(sql_query)
+
     def login(self, table_name, username, password):
         sql_query = f"SELECT * FROM {table_name}"
         table_content = self.run_query(sql_query)

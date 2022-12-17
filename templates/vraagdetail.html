@@ -5,22 +5,30 @@
             
             <ul class="nav-links">
                 <li class="nav-item"><a href="/"><img src="https://www.test-correct.nl/hubfs/raw_assets/public/test-correct/images/testcorrect-logo.svg" class="logo"></a></li>
-                <li class="nav-item"><a href="/filtering/vragen">vragen</a></li>
-                <li class="nav-item"><a href="/filtering/leerdoelen">leerdoelen</a></li>
-                <li class="nav-item"><a href="/filtering/auteurs">auteurs</a></li>
+                <li class="nav-item"><a href="/filtering/vragen">Vragen</a></li>
+                <li class="nav-item"><a href="/filtering/leerdoelen">Leerdoelen</a></li>
+                <li class="nav-item"><a href="/filtering/auteurs">Auteurs</a></li>
             </ul>  
         </nav> 
     </head>
     <body>
-
+    <form class="main_field" action="{{ url_for('vraag_aanpassen') }}" method="post">
         {% if table == vragen:%}
             {% for post in posts%}
-                <p>{{ post[0] }}</p>
-                <p>{{ post[1] }}</p>
-                <p>{{ post[2] }}</p>
-                <input type="number" name="geboortejaar" placeholder="{{ post[3] }}"><br><br>
-                <input type="number" name="medewerker" placeholder="{{ post[4] }}">
-                <p>{{ post[5] }}</p>
+                <article class="leerdoel_field">
+                    <p class="id_field">ID: {{ post[0] }}</p>
+                    <input name="id" class="input_field" type="hidden" value="{{ post[0] }}">
+                </article>
+                <article class="leerdoel_field">
+                    <p>Leerdoel: </p>
+                    <input class="input_field" name="leerdoel" type="text" value="{{ post[1] }}">
+                </article>
+                <textarea class="question_field" name="question">{{ post[2] }}</textarea>
+                <article class="leerdoel_field">
+                    <p> Auteur: </p>
+                    <input class="input_field" type="text" name="auteur" value="{{ post[3] }}">
+                </article> <br><br>
+                <input type="submit" value="Update vraag" class="update_button">
             {% endfor %}
         {% elif table == auteurs:%}
             {% for post in posts %}
@@ -32,5 +40,6 @@
                 </tr>
             {% endfor %}
         {% endif %}
+            </form>    
     </body>
 </html>
