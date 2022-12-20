@@ -1,8 +1,9 @@
 
 nav {
+    background-color: white;
     height: top;
     margin: 0px;
-    box-shadow: 0px 5px 8px black;
+    box-shadow: 0px 1px 8px black;
 }
 .nav-links {
     display: flex;
@@ -47,12 +48,13 @@ nav {
 
 div {
     background: rgb(14,8,233);
-    background: linear-gradient(140deg, rgba(14,8,233,1) 13%, rgba(0,168,255,1) 100%);
+    background: linear-gradient(-190deg, rgba(14,8,233,1) 13%, rgb(69, 193, 255) 100%);
     position: relative;
     width: 100%;
     height: 80vh;
     margin: 0px;
     padding: 0px;
+    box-shadow: 2px 0px 20px black;
 }
 
 .filter_knop_nav{
@@ -82,19 +84,25 @@ div {
 }
 
 body{
-    
+    background-color: rgba(0, 157, 255, 0.156);
     height: 100%;
     margin: 0px;
     padding: 0px;
 }
 head{
+    
     margin: 0px;
     padding: 0px;
 }
 .nav-item:first-child{
 margin-right: auto;
-
 }
+
+#changebtn{
+    background-color: blue;
+    color: white;
+}
+
 p{
     position: relative;
     top: 40%;
