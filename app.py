@@ -40,7 +40,7 @@ def login_handle():
             session.update({'username':username})
             return redirect(url_for("hello_world"))
         else:
-            return render_template("login_failed.html")
+            return render_template("login.html", error="Voer een juiste combinatie in")
 
 @app.route("/filtering/logout")
 def logout():

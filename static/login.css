@@ -62,3 +62,8 @@
   border: 1px solid red;
   border-radius: 5px;
 }
+
+.error_noti{
+  color: red;
+  font-size: 15px;
+}
