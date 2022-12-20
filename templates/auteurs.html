@@ -25,7 +25,7 @@
     </tr>
     {% for post in posts %}
     <tr>
-        <form action="{{ url_for('vraagdetail') }}" method="post">
+        <form action="{{ url_for('auteurdetail') }}" method="post">
         <input type="hidden" name="id" value="{{ post[0] }}">
         <input type="hidden" name="table" value="auteurs">
         <td>{{ post[0] }}</td>
