@@ -34,12 +34,17 @@ class VragenModel:
         return table_list
     
     def get_questions(self):
-        sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%' OR leerdoel > 7 OR auteur > 17;" 
+        sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%' OR leerdoel > 7 OR auteur > 17 OR vraag IS NULL OR auteur IS NULL OR leerdoel IS NULL;" 
         results = self.run_query(sql_query)
         return results 
     
     def get_typfout(self):
         sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%';" 
+        results = self.run_query(sql_query)
+        return results 
+
+    def get_null(self):
+        sql_query = "SELECT * FROM vragen WHERE vraag IS NULL OR auteur IS NULL OR leerdoel IS NULL;" 
         results = self.run_query(sql_query)
         return results 
     

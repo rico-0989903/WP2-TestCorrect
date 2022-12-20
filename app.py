@@ -116,6 +116,14 @@ def leerdoelfout():
     posts = vragen_model.get_leerdoelfout()
     return render_template("vragen.html", check=check, posts=posts)
 
+@app.route('/filtering/vragen/nullfout')
+def nullfout():
+    username = session['username']
+    check = vragen_model.check_rights(username)
+    check = str(check[0])
+    posts = vragen_model.get_null()
+    return render_template("vragen.html", check=check, posts=posts)
+
 #laat alle leerdoelen zien
 @app.route('/filtering/leerdoelen')
 def leerdoelen():
