@@ -98,9 +98,17 @@ head{
 margin-right: auto;
 }
 
+#centerbtn{
+    text-align: center;
+}
+
 #changebtn{
     background-color: blue;
     color: white;
+}
+
+#changebtn:hover{
+    box-shadow: 0px 1px 5px black;
 }
 
 p{
