@@ -91,7 +91,7 @@ class VragenModel:
         self.run_update(sql_query)
 
     def update_auteur(self, id, voornaam, achternaam, geboortejaar, medewerker, pensioen):
-        sql_query = f'UPDATE auteurs SET voornaam = "{voornaam}", achternaam = "{achternaam}", geboortejaar = "{geboortejaar}", medewerker = "{medewerker}", met pensioen = "{pensioen}" WHERE id = "{id}"'
+        sql_query = f'UPDATE auteurs SET voornaam = "{voornaam}", achternaam = "{achternaam}", geboortejaar = "{geboortejaar}", medewerker = "{medewerker}", "met pensioen" = "{pensioen}" WHERE id = "{id}"'
         self.run_update(sql_query)
 
     def login(self, table_name, username, password):
