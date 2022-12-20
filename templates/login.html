@@ -14,6 +14,9 @@
     <div id="div">
       <article class="login_menu">  
         <form class="form" method="post">
+          <article>
+            <h2 class="error_noti">{{ error }}</h2>
+          </article>
           <article class="form_field">
             <label for="username" class="login_label">Gebruikersnaam:</label>
             <br>
@@ -27,8 +30,10 @@
           <article>
             <input class="login_button" type="submit" value="Log-in">
           </article>
-          <h2 class="error_noti">{{ error }}</h2>
+          
+          
         </form>
+        
       </article>
     </div>
 </body>
