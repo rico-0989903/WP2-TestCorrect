@@ -5,9 +5,11 @@
         
         <ul class="nav-links">
             <li class="nav-item"><a href="/"><img src="https://www.test-correct.nl/hubfs/raw_assets/public/test-correct/images/testcorrect-logo.svg" class="logo"></a></li>
-            <li class="nav-item"><a href="/filtering/vragen">vragen</a></li>
-            <li class="nav-item"><a href="/filtering/leerdoelen">leerdoelen</a></li>
-            <li class="nav-item"><a href="/filtering/auteurs">auteurs</a></li>
+            <li class="nav-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="nav-item"><a href="/filtering/vragen">Vragen</a></li>
+            <li class="nav-item"><a href="/filtering/leerdoelen">Leerdoelen</a></li>
+            <li class="nav-item"><a href="/filtering/auteurs">Auteurs</a></li>
+            <li class="nav-item"><a id="logout" href="/filtering/logout">Log uit</a></li>
         </ul>  
     </nav>   
 </head>
@@ -23,9 +25,9 @@
         <input type="hidden" name="username" value="{{ post[0] }}">
         <td>{{ post[0] }}</td>
         {% if post[2] == "True" %}
-        <td><input class="good" type="submit" name="admin" value="Ontneem rechten"></td>
+        <td id="centerbtn"><input id="changebtn" class="good" type="submit" name="admin" value="Ontneem rechten"></td>
         {% else %}
-        <td><input class="bad" type="submit" name="admin" value="Geef rechten"></td>
+        <td id="centerbtn"><input id="changebtn" class="bad" type="submit" name="admin" value="Geef rechten"></td>
         {% endif %}
         </form>
     </tr>
