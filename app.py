@@ -152,7 +152,25 @@ def vraag_aanpassen():
         vragen_model.update_question(question_id, leerdoel, question, auteur)
     return redirect(url_for("vragen"))
 
+@app.route('/auteurdetail', methods=["POST", "GET"])
+def auteurdetail():
+    id = request.form['id']
+    table = request.form['table']
+    posts = vragen_model.get_details(id, table)
+    print(f"Dit is post: {posts}")
+    return render_template("auteurdetail.html", posts=posts)
 
+@app.route('/auteurdetail/aanpassen', methods=["GET", "POST"])
+def auteur_aanpassen():
+    if request.method == "POST":
+        auteur_id = request.form.get("id")
+        voornaam = request.form.get("voornaam")
+        achternaam = request.form.get("achternaam")
+        geboortejaar = request.form.get("geboortejaar")
+        medewerker = request.form.get("medewerker")
+        pensioen = request.form.get("pensioen")
+        vragen_model.update_auteur(auteur_id, voornaam, achternaam, geboortejaar, medewerker, pensioen)
+    return redirect(url_for("auteurs"))
 
 # SELECT id, KOLOMNAAM from TABELNAAM
 # python filter op DATATYPE en stuur naar browser
