@@ -68,18 +68,32 @@ div {
 
 .filter_knop{
     text-align: center;
-    
     border-radius: 10px;
-    text-shadow: 2px 2px 0px #000000;
+    text-shadow: 2px 0px 0px #000000;
     padding: 10px;
     margin-left: 10px;
     text-decoration: none;
     background-color: #004df5;
     color: white;
-    font-family: Impact, 'Arial', sans-serif;
+    font-family: Nunito,sans-serif;
 }
 
 .filter_knop:hover{
+    box-shadow: 2px 2px 2px black;
+}
+
+.filter_knop_cvs{
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    text-decoration: none;
+    background-color: #04ff00;
+    color: black;
+    font-family: Nunito,sans-serif;
+}
+
+.filter_knop_cvs:hover{
     box-shadow: 2px 2px 2px black;
 }
 
@@ -155,18 +169,24 @@ td{
 
 .range_input{
     height: 25px;
-    margin-left: 10px;
+    margin-left: 0px;
     border-radius: 5px;
+    width: 50px;
 }
 
 .filter_label{
     text-align: center;
+    font-family: Nunito,sans-serif;
+    
 }
 
 .range_marker{
+    font-family: Nunito,sans-serif;
     color: #000000;
-    margin-left: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     margin-top: 5px;
+    
 }
 
 .error{
