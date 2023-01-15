@@ -79,7 +79,7 @@ class VragenModel:
         return results 
     
     def get_auteurs(self):
-        sql_query = "SELECT * FROM auteurs WHERE geboortejaar < 1940 OR medewerker = 0 OR medewerker = 1;" 
+        sql_query = "SELECT * FROM auteurs WHERE geboortejaar < 1940 OR medewerker !=0 AND medewerker != 1;" 
         results = self.run_query(sql_query)
         return results
 

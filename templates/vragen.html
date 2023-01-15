@@ -1,5 +1,7 @@
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='table2csv.min.js')}}"></script>
     <link rel='stylesheet' href="{{ url_for('static', filename='stylesheet.css')}}">
     <nav class="navbar">
         
@@ -14,6 +16,7 @@
     </nav>   
 </head>
 <body>
+    
     <form class="form" method="POST" action="{{ url_for('filteren') }}">
         <h2 class="filter_label">ID range instellen</h2>
         <article class="range_filter">
@@ -27,47 +30,64 @@
             <li><input class="filter_knop" name="action" type="submit" value="Niet bestaande auteurs"></input></li>
             <li><input class="filter_knop" name="action" type="submit" value="Niet bestaande leerdoelen"></input></li>
             <li><input class="filter_knop" name="action" type="submit" value="Lege vakjes"></input></li>
-            <li><input class="filter_knop_cvs" name="action" type="submit" value="Export CVS"></input></li>
+            <li><a class="filter_knop_cvs" onclick="return downloadcsv()">Export CVS</a></li>
         </ul>
     </form>
-<table>    
-    {% if check == "('True',)" %}
-    <tr>
-        <th>ID</th>
-        <th>Leerdoel</th>
-        <th>Vraag</th>
-        <th>Auteur</th>
-        <th></th>
-    </tr>
-    {% for post in posts %}
-    <tr>
-        <form action="{{ url_for('vraagdetail') }}" method="post">
-        <input type="hidden" name="id" value="{{ post[0] }}">
-        <input type="hidden" name="table" value="vragen">
-        <td>{{ post[0] }}</td>
-        <td>{{ post[1] }}</td>
-        <td>{{ post[2] }}</td>
-        <td>{{ post[3] }}</td>
-        <td id="centerbtn"><input id="changebtn" type="submit" value="Aanpassen"></td>
-        </form>
-    </tr>
-    {% endfor %}
-    {% else %}
-    <tr>
-        <th>ID</th>
-        <th>Leerdoel</th>
-        <th>Vraag</th>
-        <th>Auteur</th>
-    </tr>
-    {% for post in posts %}
-    <tr>
-        <td>{{ post[0] }}</td>
-        <td>{{ post[1] }}</td>
-        <td>{{ post[2] }}</td>
-        <td>{{ post[3] }}</td>
-    </tr>
-    {% endfor %}
-    {% endif %}
+        
+            
+           
+    
+<table id="csvtable">
+    <thead>  
+        {% if check == "('True',)" %}
+        <tr>
+            <th>ID</th>
+            <th>Leerdoel</th>
+            <th>Vraag</th>
+            <th>Auteur</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <form action="{{ url_for('vraagdetail') }}" method="post">
+            <input type="hidden" name="id" value="{{ post[0] }}">
+            <input type="hidden" name="table" value="vragen">
+            <td>{{ post[0] }}</td>
+            <td>{{ post[1] }}</td>
+            <td>{{ post[2] }}</td>
+            <td>{{ post[3] }}</td>
+            <td id="centerbtn"><input id="changebtn" type="submit" value="Aanpassen"></td>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+        {% else %}
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Leerdoel</th>
+            <th>Vraag</th>
+            <th>Auteur</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post[0] }}</td>
+            <td>{{ post[1] }}</td>
+            <td>{{ post[2] }}</td>
+            <td>{{ post[3] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+        {% endif %}
 </table>
+<script>
+    function downloadcsv(){
+        $("table").table2csv(); 
+    }
+</script>
 </body>
 </html>

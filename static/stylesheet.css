@@ -69,6 +69,7 @@ div {
 .filter_knop{
     text-align: center;
     border-radius: 10px;
+    border: 2px solid #000000;
     text-shadow: 2px 0px 0px #000000;
     padding: 10px;
     margin-left: 10px;
@@ -83,10 +84,13 @@ div {
 }
 
 .filter_knop_cvs{
+    position: relative;
     text-align: center;
     border-radius: 10px;
+    border: 2px solid #000000;
     padding: 10px;
     margin-left: 10px;
+    top: 11px;
     text-decoration: none;
     background-color: #04ff00;
     color: black;
