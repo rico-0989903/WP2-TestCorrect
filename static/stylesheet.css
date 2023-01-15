@@ -146,3 +146,30 @@ td{
     color: white; 
     background-color: rgb(0, 0, 0, 0.6);
 }
+
+.range_filter{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.range_input{
+    height: 25px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.filter_label{
+    text-align: center;
+}
+
+.range_marker{
+    color: #000000;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.error{
+    text-align: center;
+    color: red;
+}

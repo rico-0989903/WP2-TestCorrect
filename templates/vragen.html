@@ -14,12 +14,21 @@
     </nav>   
 </head>
 <body>
-    <ul class="filter_knop_nav">
-        <li><a class="filter_knop" href="/filtering/vragen/typfout">Typ fouten</a></li>
-        <li><a class="filter_knop" href="/filtering/vragen/auteurfout">Niet bestaande auteurs</a></li>
-        <li><a class="filter_knop" href="/filtering/vragen/leerdoelfout">Niet bestaande leerdoelen</a></li>
-        <li><a class="filter_knop" href="/filtering/vragen/nullfout">Lege vakjes</a></li>
-    </ul>
+    <form class="form" method="POST" action="{{ url_for('filteren') }}">
+        <h2 class="filter_label">ID range instellen</h2>
+        <article class="range_filter">
+            <input type="text" class="range_input" name="minimum">
+            <p class="range_marker">tot aan</p>
+            <input type="text" class="range_input" name="maximum">
+            <h4 class="error">{{ error }}</h4>
+        </article>
+        <ul class="filter_knop_nav">
+            <li><input class="filter_knop" name="action" type="submit" value="Typ fouten"></input></li>
+            <li><input class="filter_knop" name="action" type="submit" value="Niet bestaande auteurs"></input></li>
+            <li><input class="filter_knop" name="action" type="submit" value="Niet bestaande leerdoelen"></input></li>
+            <li><input class="filter_knop" name="action" type="submit" value="Lege vakjes"></input></li>
+        </ul>
+    </form>
 <table>    
     {% if check == "('True',)" %}
     <tr>
