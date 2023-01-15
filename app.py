@@ -81,7 +81,7 @@ def hello_world():
     return render_template('Index.html', tablenames=tables)
 
 #laat alle fouten zien
-@app.route('/filtering/vragen')
+@app.route('/filtering/vragen', methods=["GET", "POST"])
 def vragen():
     username = session['username']
     check = vragen_model.check_rights(username)
@@ -89,40 +89,44 @@ def vragen():
     posts = vragen_model.get_questions()
     return render_template("vragen.html", check=check, posts=posts)
 
-#laat alle typfouten zien
-@app.route('/filtering/vragen/typfout')
-def typfout():
-    username = session['username']
-    check = vragen_model.check_rights(username)
-    check = str(check[0])
-    posts = vragen_model.get_typfout()
-    return render_template("vragen.html", check=check, posts=posts)
+@app.route('/filtering/vragen/filter', methods=["GET", "POST"])
+def filteren():
+    try:
+        min_value = int(request.form.get("minimum"))
+        print("Min is an int!")
+    except:
+        min_value = None
 
-#laat alle niet bestaande auteurs zien
-@app.route('/filtering/vragen/auteurfout')
-def auteurfout():
+    try:
+        max_value = int(request.form.get("maximum"))
+        print("Max is an int!")
+    except:
+        max_value = None
+    
+    print(min_value, max_value)
     username = session['username']
     check = vragen_model.check_rights(username)
     check = str(check[0])
-    posts = vragen_model.get_auteurfout()
-    return render_template("vragen.html", check=check, posts=posts)
 
-#laat alle niet bestaande leerdoelen zien
-@app.route('/filtering/vragen/leerdoelfout')
-def leerdoelfout():
-    username = session['username']
-    check = vragen_model.check_rights(username)
-    check = str(check[0])
-    posts = vragen_model.get_leerdoelfout()
-    return render_template("vragen.html", check=check, posts=posts)
+    #laat alle typfouten zien
+    if request.form['action'] == 'Typ fouten':
+        posts = vragen_model.get_typfout(min_value, max_value)
+        return render_template("vragen.html", check=check, posts=posts)
 
-@app.route('/filtering/vragen/nullfout')
-def nullfout():
-    username = session['username']
-    check = vragen_model.check_rights(username)
-    check = str(check[0])
-    posts = vragen_model.get_null()
-    return render_template("vragen.html", check=check, posts=posts)
+    #laat alle niet bestaande auteurs zien
+    elif request.form['action'] == 'Niet bestaande auteurs':
+        posts = vragen_model.get_auteurfout(min_value, max_value)
+        return render_template("vragen.html", check=check, posts=posts)
+
+    #laat alle niet bestaande leerdoelen zien
+    elif request.form['action'] == 'Niet bestaande leerdoelen':
+        posts = vragen_model.get_leerdoelfout(min_value, max_value)
+        return render_template("vragen.html", check=check, posts=posts)
+    
+    #laat alle vragen met lege vakken zien
+    elif request.form['action'] == 'Lege vakjes':
+        posts = vragen_model.get_null(min_value, max_value)
+        return render_template("vragen.html", check=check, posts=posts)
 
 #laat alle leerdoelen zien
 @app.route('/filtering/leerdoelen')
@@ -165,7 +169,6 @@ def auteurdetail():
     id = request.form['id']
     table = request.form['table']
     posts = vragen_model.get_details(id, table)
-    print(f"Dit is post: {posts}")
     return render_template("auteurdetail.html", posts=posts)
 
 @app.route('/auteurdetail/aanpassen', methods=["GET", "POST"])

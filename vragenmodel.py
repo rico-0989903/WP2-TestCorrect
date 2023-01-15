@@ -38,23 +38,43 @@ class VragenModel:
         results = self.run_query(sql_query)
         return results 
     
-    def get_typfout(self):
-        sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%';" 
+    def get_typfout(self, min_id, max_id):
+        if min_id == None or max_id == None:
+            sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%';"
+        elif min_id < 1:
+            sql_query = "SELECT * FROM vragen WHERE vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%';"
+        else:
+            sql_query = f"SELECT * FROM vragen WHERE (id >= {min_id} AND id <= {max_id}) AND (vraag LIKE '%<br>%' OR vraag LIKE '%&nbsp;%');" 
         results = self.run_query(sql_query)
         return results 
 
-    def get_null(self):
-        sql_query = "SELECT * FROM vragen WHERE vraag IS NULL OR auteur IS NULL OR leerdoel IS NULL;" 
+    def get_null(self, min_id, max_id):
+        if min_id == None or max_id == None:
+            sql_query = "SELECT * FROM vragen WHERE vraag IS NULL OR auteur IS NULL OR leerdoel IS NULL;" 
+        elif min_id < 1:
+            sql_query = "SELECT * FROM vragen WHERE vraag IS NULL OR auteur IS NULL OR leerdoel IS NULL;" 
+        else:
+            sql_query = f"SELECT * FROM vragen WHERE (id >= {min_id} AND id <= {max_id}) AND (vraag IS NULL OR auteur IS NULL OR leerdoel IS NULL);"
         results = self.run_query(sql_query)
         return results 
     
-    def get_auteurfout(self):
-        sql_query = "SELECT * FROM vragen WHERE auteur > 17;" 
+    def get_auteurfout(self, min_id, max_id):
+        if min_id == None or max_id == None:
+            sql_query = "SELECT * FROM vragen WHERE auteur > 17;" 
+        elif min_id < 1:
+            sql_query = "SELECT * FROM vragen WHERE auteur > 17;" 
+        else:
+            sql_query = f"SELECT * FROM vragen WHERE (id >= {min_id} AND id <= {max_id}) AND (auteur > 17);" 
         results = self.run_query(sql_query)
         return results
     
-    def get_leerdoelfout(self):
-        sql_query = "SELECT * FROM vragen WHERE leerdoel > 7;" 
+    def get_leerdoelfout(self, min_id, max_id):
+        if min_id == None or max_id == None:
+            sql_query = "SELECT * FROM vragen WHERE leerdoel > 7;" 
+        elif min_id < 1:
+            sql_query = "SELECT * FROM vragen WHERE leerdoel > 7;" 
+        else:
+            sql_query = f"SELECT * FROM vragen WHERE (id >= {min_id} AND id <= {max_id}) AND (leerdoel > 7);" 
         results = self.run_query(sql_query)
         return results 
     
