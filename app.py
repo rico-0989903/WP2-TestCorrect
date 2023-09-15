@@ -1,14 +1,20 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask_bcrypt import Bcrypt
 import os
 from vragenmodel import VragenModel
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+
+
 
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 Flask.secret_key = "team_brainstorm"
-
-
+app.config['SECRET_KEY'] = 'a3962e306c5e4fc68d6f7895ba26c6f2'
+jwt = JWTManager(app)
 database_file = "databases/testcorrect_vragen.db"
 vragen_model = VragenModel(database_file)
+
 
 @app.before_request
 def check_login():
@@ -26,7 +32,10 @@ def index():
 #login pagina
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    if "login" in session:
+        return redirect(url_for("hello_world"))
+    else:
+        return render_template("login.html")
 
 #login handeling
 @app.route("/login", methods=["POST", "GET"])
@@ -34,11 +43,14 @@ def login_handle():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        login_status = vragen_model.login("inlog", username, password)
+        hashed_password = vragen_model.get_userinfo(username)
+        print(hashed_password[0][0])
+        login_status = bcrypt.check_password_hash(hashed_password[0][0], password)
         if login_status == True:
             session['login'] = "logged_in"
             session.update({'username':username})
-            return redirect(url_for("hello_world"))
+            access_token = create_access_token(identity=username)
+            return jsonify(access_token=access_token)
         else:
             return render_template("login.html", error="Voer een juiste combinatie in")
 
@@ -46,11 +58,11 @@ def login_handle():
 def logout():
     del session['login']
     del session['username']
-    print(session)
     return redirect(url_for('login'))
 
 #dashboardscherm
 @app.route("/dashboard", methods=["GET", "POST"])
+@jwt_required()
 def dashboard():
     username = session['username']
     check = vragen_model.check_rights(username)
@@ -62,6 +74,7 @@ def dashboard():
         return render_template("norights.html", posts=posts)
 
 @app.route("/check", methods=["GET", "POST"])
+@jwt_required()
 def check():
     username = request.form.get("username")
     admin = request.form.get("admin")
@@ -75,6 +88,7 @@ def check():
 
 #keuzescherm
 @app.route('/filtering/')
+@jwt_required()
 def hello_world():
     print(session)
     tables = vragen_model.get_tables()
@@ -82,6 +96,7 @@ def hello_world():
 
 #laat alle fouten zien
 @app.route('/filtering/vragen', methods=["GET", "POST"])
+@jwt_required()
 def vragen():
     username = session['username']
     check = vragen_model.check_rights(username)
@@ -90,6 +105,7 @@ def vragen():
     return render_template("vragen.html", check=check, posts=posts)
 
 @app.route('/filtering/vragen/filter', methods=["GET", "POST"])
+@jwt_required()
 def filteren():
     try:
         min_value = int(request.form.get("minimum"))
@@ -130,6 +146,7 @@ def filteren():
 
 #laat alle leerdoelen zien
 @app.route('/filtering/leerdoelen')
+@jwt_required()
 def leerdoelen():
     username = session['username']
     check = vragen_model.check_rights(username)
@@ -139,6 +156,7 @@ def leerdoelen():
 
 #laat alle auteurs zien
 @app.route('/filtering/auteurs', methods=["GET", "POST"])
+@jwt_required()
 def auteurs():
     username = session['username']
     check = vragen_model.check_rights(username)
@@ -148,6 +166,7 @@ def auteurs():
 
 #laat de details van de gekozen line zien
 @app.route('/vraagdetail', methods=["GET", "POST"])
+@jwt_required()
 def vraagdetail():
     id = request.form['id']
     table = request.form['table']
@@ -155,6 +174,7 @@ def vraagdetail():
     return render_template("vraagdetail.html", posts=posts)
 
 @app.route('/vraagdetail/aanpassen', methods=["GET", "POST"])
+@jwt_required()
 def vraag_aanpassen():
     if request.method == "POST":
         question_id = request.form.get("id")
@@ -165,6 +185,7 @@ def vraag_aanpassen():
     return redirect(url_for("vragen"))
 
 @app.route('/auteurdetail', methods=["POST", "GET"])
+@jwt_required()
 def auteurdetail():
     id = request.form['id']
     table = request.form['table']
@@ -172,6 +193,7 @@ def auteurdetail():
     return render_template("auteurdetail.html", posts=posts)
 
 @app.route('/auteurdetail/aanpassen', methods=["GET", "POST"])
+@jwt_required()
 def auteur_aanpassen():
     if request.method == "POST":
         auteur_id = request.form.get("id")

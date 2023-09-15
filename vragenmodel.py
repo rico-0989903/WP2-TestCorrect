@@ -94,6 +94,11 @@ class VragenModel:
         results = self.run_query(sql_query)
         return results
 
+    def get_userinfo(self, username):
+        sql_query = f'SELECT "wachtwoord" FROM "inlog" WHERE gebruikersnaam = "{username}";'
+        results = self.run_query(sql_query)
+        return results
+
     def get_username(self):
         sql_query = "SELECT * FROM inlog;"
         results = self.run_query(sql_query)
